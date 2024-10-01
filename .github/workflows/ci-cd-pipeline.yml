@@ -25,22 +25,27 @@ jobs:
         run: |
           pip install -r requirements.txt  
 
+      - name: Install AWS CLI
+        run: |
+          pip install awscli
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Replace with your AWS region
+
       - name: Run unit tests
         run: |
           python transformation_unit_test.py  
 
       - name: Upload Glue Script to S3
         if: success()  
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws s3 cp silver_transformed_all.py s3://emeka-market-raw-sales-data/scripts/silver_transformed_all.py
+          aws s3 cp silver_transformed_all.py s3://emeka-market-raw-sales-data/scripts/silver_transformed_all.py 
 
       - name: Start Glue Job
         if: success()  
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           aws glue start-job-run --job-name your-glue-job-name  # Replace with your Glue job name

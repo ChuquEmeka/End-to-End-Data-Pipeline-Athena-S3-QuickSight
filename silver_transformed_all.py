@@ -150,14 +150,33 @@ def transform_sales_data(df_raw, output_dir='output'):
     df_fact_sales['LocationID'] = df_raw['Location'].apply(lambda x: x['LocationID'] if isinstance(x, dict) else json.loads(x)[0]['LocationID'])
     df_fact_sales['CustomerID'] = df_raw['Customer'].apply(lambda x: x['CustomerID'] if isinstance(x, dict) else json.loads(x)[0]['CustomerID'])
 
-    # Save unique dimension tables and fact table to CSV in the specified output directory
-    df_product.to_csv(os.path.join(output_dir, 'product_dim.csv'), index=False)
-    df_customer.to_csv(os.path.join(output_dir, 'customer_dim.csv'), index=False)
-    df_location.to_csv(os.path.join(output_dir, 'location_dim.csv'), index=False)
-    df_promotion.to_csv(os.path.join(output_dir, 'promotion_dim.csv'), index=False)
-    df_shipping.to_csv(os.path.join(output_dir, 'shipping_dim.csv'), index=False)
-    df_review.to_csv(os.path.join(output_dir, 'review_dim.csv'), index=False)
-    df_fact_sales.to_csv(os.path.join(output_dir, 'fact_sales.csv'), index=False)
+    # # Save unique dimension tables and fact table to CSV in the specified output directory
+    # df_product.to_csv(os.path.join(output_dir, 'product_dim.csv'), index=False)
+    # df_customer.to_csv(os.path.join(output_dir, 'customer_dim.csv'), index=False)
+    # df_location.to_csv(os.path.join(output_dir, 'location_dim.csv'), index=False)
+    # df_promotion.to_csv(os.path.join(output_dir, 'promotion_dim.csv'), index=False)
+    # df_shipping.to_csv(os.path.join(output_dir, 'shipping_dim.csv'), index=False)
+    # df_review.to_csv(os.path.join(output_dir, 'review_dim.csv'), index=False)
+    # df_fact_sales.to_csv(os.path.join(output_dir, 'fact_sales.csv'), index=False)
+
+    s3 = boto3.client('s3')
+    bucket_name = 'emeka-transformed-sales-data'
+    # Function to upload a DataFrame to S3 as CSV
+    def upload_to_s3(df, file_name, bucket):
+        csv_buffer = StringIO()
+        df.to_csv(csv_buffer, index=False)
+        s3.put_object(Bucket=bucket, Key=file_name, Body=csv_buffer.getvalue())
+
+    # Save unique dimension tables and fact table to S3
+    upload_to_s3(df_product, 'product_dim.csv', bucket_name)
+    upload_to_s3(df_customer, 'customer_dim.csv', bucket_name)
+    upload_to_s3(df_location, 'location_dim.csv', bucket_name)
+    upload_to_s3(df_promotion, 'promotion_dim.csv', bucket_name)
+    upload_to_s3(df_shipping, 'shipping_dim.csv', bucket_name)
+    upload_to_s3(df_review, 'review_dim.csv', bucket_name)
+    upload_to_s3(df_fact_sales, 'fact_sales.csv', bucket_name)
+
+
 
     print("Data transformation complete. Saved tables:")
     print("- product_dim.csv")

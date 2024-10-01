@@ -34,18 +34,18 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1  # Replace with your AWS region
+          aws-region: us-east-1 
 
       - name: Run unit tests
         run: |
           python transformation_unit_test.py  
 
-      - name: Upload Glue Script to S3
+      - name: Apply transformation on Production Data and save Dimension and Fact Tables to S3
         if: success()  
         run: |
-          aws s3 cp silver_transformed_all.py s3://emeka-market-raw-sales-data/scripts/silver_transformed_all.py 
+          python silver_transformed_all.py 
 
-      - name: Start Glue Job
+      - name: Also Run silver_transformation
         if: success()  
         run: |
-          aws glue start-job-run --job-name your-glue-job-name  # Replace with your Glue job name
+          python unused codes\silver_transformation.py

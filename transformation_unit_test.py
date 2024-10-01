@@ -1,15 +1,20 @@
+
+
+
 import pandas as pd
 import json
 import os
 import unittest
 from silver_transformed_all import transform_sales_data
+from unittest.mock import patch
+from io import StringIO  # Import StringIO
 
 class TestSalesTransformation(unittest.TestCase):
-    
+
     @classmethod
     def setUpClass(cls):
         # Create a mock raw sales data for testing
-        raw_data = {
+        cls.raw_data = {
             'SaleID': [1, 2],
             'Product': [
                 json.dumps([{'ProductID': 1, 'ProductName': 'Phone', 'Category': 'Electronics', 'UnitCost': 300, 'UnitPrice': 600}]),
@@ -22,8 +27,8 @@ class TestSalesTransformation(unittest.TestCase):
             'Quantity': [2, 1],
             'Date': ['2024-09-30T12:00:00', '2024-09-30T13:00:00'],
             'Location': [
-                json.dumps([{'LocationID': 1, 'Country': 'Germany',  'City': 'Berlin', 'PostalCode': 10115, 'Region': 'Europe'}]),
-                json.dumps([{'LocationID': 1, 'Country': 'Germany',  'City': 'Berlin', 'PostalCode': 10115, 'Region': 'Europe'}])
+                json.dumps([{'LocationID': 1, 'Country': 'Germany', 'City': 'Berlin', 'PostalCode': 10115, 'Region': 'Europe'}]),
+                json.dumps([{'LocationID': 1, 'Country': 'Germany', 'City': 'Berlin', 'PostalCode': 10115, 'Region': 'Europe'}])
             ],
             'PaymentID': [1, 2],
             'Shipping': [
@@ -43,23 +48,12 @@ class TestSalesTransformation(unittest.TestCase):
         cls.output_dir = 'unit_test_folder'  # Changed to 'unit_test_folder'
         os.makedirs(cls.output_dir, exist_ok=True)  # Create the output directory if it doesn't exist
 
-        # Save raw sales data in the output directory
-        raw_file_path = os.path.join(cls.output_dir, 'raw_sales_data.csv')
-        df_raw = pd.DataFrame(raw_data)
-        print("Columns in df_raw:", df_raw.columns.tolist())
-
-        df_raw.to_csv(raw_file_path, index=False)
-
-    # @classmethod
-    # def tearDownClass(cls):
-    #     # Clean up after tests
-    #     for file in os.listdir(cls.output_dir):
-    #         os.remove(os.path.join(cls.output_dir, file))
-    #     os.rmdir(cls.output_dir)
+        # Save raw sales data in the output directory for transformation
+        cls.df_raw = pd.DataFrame(cls.raw_data)
 
     def test_transform_sales_data(self):
-        # Call the transformation function
-        transform_sales_data(os.path.join(self.output_dir, 'raw_sales_data.csv'), self.output_dir)
+        # Call the transformation function with the raw DataFrame
+        transform_sales_data(self.df_raw)
 
         # Load the resulting tables from the test output directory
         df_product = pd.read_csv(os.path.join(self.output_dir, 'product_dim.csv'))
@@ -157,3 +151,4 @@ class TestSalesTransformation(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+

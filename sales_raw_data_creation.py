@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import random
 import json
-
+import boto3
 # Business Name
 business_name = "EmekaMarkt Deutschland"
 
@@ -127,7 +127,8 @@ sales_data = {
 
 # Generate sequential transaction dates
 start_date = pd.Timestamp('2014-01-01')  # Start date
-end_date = pd.to_datetime('now').normalize()  # Ensure it does not exceed now
+# end_date = pd.to_datetime('now').normalize()  # Ensure it does not exceed now
+end_date = pd.to_datetime('now', utc=True).normalize()
 date_range = pd.date_range(start=start_date, end=end_date, freq='H')
 
 # Assign random dates (including time) for each transaction
@@ -240,7 +241,21 @@ for index, row in df_sales.iterrows():
 df_final = pd.DataFrame(json_objects)
 
 # Save to CSV
-df_final.to_csv('raw_sales_data.csv', index=False)
+# df_final.to_csv('raw_sales_data.csv', index=False)
+
+# Save to CSV
+output_file = 'raw_sales_data.csv'
+df_final.to_csv(output_file, index=False)
+
+# Upload to S3
+s3 = boto3.client('s3')
+bucket_name = 'emeka-market-raw-sales-data'
+s3_file_path = 'raw_sales_data.csv'  # This is the key (name) you want for the file in S3
+
+# Uploading the file to S3 with the specified bucket name and key
+s3.upload_file(output_file, bucket_name, s3_file_path)
+
+print(f"Sales data saved to {output_file} and uploaded to S3 bucket {bucket_name}.")
 
 # Display sample outputs
 print("Sales Data Sample with Dimensions:")

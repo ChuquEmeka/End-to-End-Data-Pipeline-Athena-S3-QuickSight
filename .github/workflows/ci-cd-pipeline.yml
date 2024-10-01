@@ -27,7 +27,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          pytest unit_test_folder/transformation_unit_test.py  
+          python transformation_unit_test.py  
 
       - name: Upload Glue Script to S3
         if: success()  

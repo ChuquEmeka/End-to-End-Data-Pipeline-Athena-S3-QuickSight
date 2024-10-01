@@ -68,6 +68,10 @@ EmekaMarkt-E2E-DataProject/
     └── workflows/  
         └── ci_cd_pipeline.yml  
 
+  
+  
+![ER](images/workflows.png)
+
 
 ## Workflow
 

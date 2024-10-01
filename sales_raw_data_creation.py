@@ -116,7 +116,7 @@ customer_ids = list(range(1, len(customer_names) + 1))
 
 # Generate sales data
 n_records = 150000
-
+# n_records = 15
 # Create a DataFrame for sales transactions (fact table)
 sales_data = {
     'SaleID': np.arange(1, n_records + 1),
@@ -127,8 +127,8 @@ sales_data = {
 
 # Generate sequential transaction dates
 start_date = pd.Timestamp('2014-01-01')  # Start date
-# end_date = pd.to_datetime('now').normalize()  # Ensure it does not exceed now
-end_date = pd.to_datetime('now', utc=True).normalize()
+end_date = pd.to_datetime('now').normalize()  # Ensure it does not exceed now
+# end_date = pd.to_datetime('now', utc=True).normalize()
 date_range = pd.date_range(start=start_date, end=end_date, freq='H')
 
 # Assign random dates (including time) for each transaction
@@ -241,8 +241,8 @@ for index, row in df_sales.iterrows():
 df_final = pd.DataFrame(json_objects)
 
 # Save to CSV
-# df_final.to_csv('raw_sales_data.csv', index=False)
-
+# df_final.to_csv('sample_raw_sales_data.csv', index=False)
+#########################################################################
 # Save to CSV
 output_file = 'raw_sales_data.csv'
 df_final.to_csv(output_file, index=False)
@@ -256,7 +256,7 @@ s3_file_path = 'raw_sales_data.csv'  # This is the key (name) you want for the f
 s3.upload_file(output_file, bucket_name, s3_file_path)
 
 print(f"Sales data saved to {output_file} and uploaded to S3 bucket {bucket_name}.")
-
+#########################################################################
 # Display sample outputs
 print("Sales Data Sample with Dimensions:")
 print(df_final.head())

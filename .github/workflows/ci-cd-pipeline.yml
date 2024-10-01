@@ -32,7 +32,7 @@ jobs:
       - name: Upload Glue Script to S3
         if: success()  
         run: |
-          aws s3 cp silver_transformed_all.py s3://emeka-market-raw-sales-data/scripts/silver_transformed_all.py  # Upload to your S3 bucket
+          aws s3 cp silver_transformed_all.py s3://emeka-market-raw-sales-data/scripts/silver_transformed_all.py 
 
       - name: Start Glue Job
         if: success()  

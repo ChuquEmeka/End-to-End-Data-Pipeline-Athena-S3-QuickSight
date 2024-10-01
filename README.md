@@ -22,7 +22,8 @@ The primary advantages of using a star schema are:
 
 I also created an **Entity-Relationship Diagram (ERD)** to visually represent the relationships between the different entities in my data model. The ERD provides a clear overview of how the fact table interacts with the various dimension tables through foreign key relationships. This visual aid not only helps in understanding the data model but also serves as documentation for future reference.
 
-By adopting the star schema and ERD, I can ensure that my data model is both efficient and effective for analysis, allowing me to derive valuable insights from the e-commerce sales data while preparing it for potential future needs.
+By adopting the star schema and ERD, I can ensure that my data model is both efficient and effective for analysis, allowing me to derive valuable insights from the e-commerce sales data while preparing it for potential future needs.  
+![ER](images/ER.png)
 
 
 ### Key Components

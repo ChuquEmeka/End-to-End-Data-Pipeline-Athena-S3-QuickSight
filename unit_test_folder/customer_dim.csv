@@ -1,0 +1,3 @@
+CustomerID,CustomerName,Email,PhoneNumber,LoyaltyStatus
+1,Emma Watson,emma.watson@example.com,+49-1234567890,Gold
+2,Dwayne Johnson,dwayne.johnson@example.com,+49-0987654321,Silver

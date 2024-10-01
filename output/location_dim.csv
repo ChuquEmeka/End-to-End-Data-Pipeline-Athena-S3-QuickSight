@@ -1,0 +1,11 @@
+LocationID,Country,State,City,PostalCode,Region
+7,Spain,,Seville,23169,Europe
+4,France,,Paris,65667,Europe
+8,Netherlands,,Utrecht,99874,Europe
+2,USA,,Houston,78872,North America
+6,Italy,,Rome,53195,Europe
+5,Canada,,Vancouver,68118,North America
+1,Germany,,Hamburg,92777,Europe
+10,Japan,,Yokohama,73874,Asia
+9,China,,Beijing,25485,Asia
+3,UK,,Glasgow,68416,Europe

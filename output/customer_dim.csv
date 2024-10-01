@@ -1,0 +1,21 @@
+CustomerID,CustomerName,Email,PhoneNumber,LoyaltyStatus
+8,Shakira,shakira@example.com,+49-7610770501,Bronze
+6,Leonardo DiCaprio,leonardo.dicaprio@example.com,+49-4342674356,Silver
+5,Adele,adele@example.com,+49-4985735730,Silver
+9,Ed Sheeran,ed.sheeran@example.com,+49-7790628068,Bronze
+15,Drake,drake@example.com,+49-1772321638,Silver
+7,Taylor Swift,taylor.swift@example.com,+49-3027318169,Silver
+12,Rihanna,rihanna@example.com,+49-9165673197,Bronze
+14,Kate Winslet,kate.winslet@example.com,+49-5083585071,Silver
+16,Bruno Mars,bruno.mars@example.com,+49-7006262599,Silver
+11,Benedict Cumberbatch,benedict.cumberbatch@example.com,+49-5304067527,Silver
+13,Daniel Craig,daniel.craig@example.com,+49-2949631066,Silver
+4,Chris Hemsworth,chris.hemsworth@example.com,+49-8076333663,Gold
+10,Selena Gomez,selena.gomez@example.com,+49-2760511088,Gold
+1,Emma Watson,emma.watson@example.com,+49-8753794747,Gold
+2,Dwayne Johnson,dwayne.johnson@example.com,+49-4605641700,Silver
+19,Scarlett Johansson,scarlett.johansson@example.com,+49-2563280125,Silver
+20,Zayn Malik,zayn.malik@example.com,+49-4521901351,Gold
+17,Gal Gadot,gal.gadot@example.com,+49-6014726756,Bronze
+3,Angelina Jolie,angelina.jolie@example.com,+49-8985163441,Bronze
+18,Robert Downey Jr.,robert.downey.jr.@example.com,+49-8202002275,Gold

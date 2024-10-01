@@ -1,0 +1,62 @@
+ProductID,ProductName,Category,UnitCost,UnitPrice
+54,Table,Furniture,300,740.0
+48,Wardrobe,Furniture,600,1355.65
+33,Notebook,Office Supplies,5,8.22
+49,Cupboard,Furniture,350,748.83
+61,Projector,Electronics,400,648.66
+12,Blender,Home Appliances,40,88.95
+56,Smartwatch,Electronics,250,540.23
+35,Towel,Home Textiles,10,16.1
+14,Couch,Furniture,500,837.31
+9,Monitor,Electronics,150,384.75
+55,Headset,Electronics,70,174.99
+27,Dishwasher,Home Appliances,450,709.41
+57,Charger,Electronics,20,32.51
+50,Perfume,Accessories,50,116.48
+7,Spoon,Kitchenware,5,14.75
+45,Pillow,Home Textiles,20,56.67
+36,Bicycle,Outdoor,200,320.85
+43,Rug,Home Textiles,40,119.11
+28,Shoes,Footwear,60,172.13
+53,Sofa,Furniture,700,1527.6
+5,Pot,Kitchenware,15,28.97
+40,Fan,Home Appliances,50,95.82
+58,Speaker,Electronics,150,419.08
+24,Mixer,Home Appliances,30,62.72
+19,Oven,Home Appliances,400,621.74
+32,Pen,Office Supplies,3,8.42
+2,Clock,Home Appliances,20,50.96
+52,Conditioner,Home Appliances,10,20.69
+21,Vacuum Cleaner,Home Appliances,200,339.99
+46,Mattress,Furniture,400,1121.98
+16,Chair,Furniture,100,180.36
+22,Air Conditioner,Home Appliances,500,861.14
+15,Desk,Furniture,150,375.12
+11,Television,Electronics,400,844.64
+8,Tablet,Electronics,200,548.97
+41,Heater,Home Appliances,80,138.92
+25,Washing Machine,Home Appliances,600,1285.12
+1,Phone,Electronics,300,661.82
+59,Router,Electronics,100,224.19
+18,Refrigerator,Home Appliances,800,1220.29
+13,Microwave,Home Appliances,100,150.06
+38,Drill,Tools,80,164.19
+51,Shampoo,Home Appliances,10,23.98
+37,Scooter,Outdoor,300,770.8
+17,Camera,Cameras,600,963.84
+39,Hammer,Tools,20,31.44
+3,Laptop,Computers,800,2034.5
+31,Book,Books,15,25.34
+29,Backpack,Bags,40,70.67
+20,Printer,Office Supplies,150,258.53
+6,Plates,Kitchenware,10,16.13
+60,Modem,Electronics,90,195.97
+47,Blanket,Home Textiles,25,48.35
+42,Lamp,Lighting,25,42.58
+4,Keyboard,Accessories,30,65.14
+23,Toaster,Home Appliances,25,74.76
+26,Dryer,Home Appliances,400,639.94
+30,Watch,Accessories,100,201.97
+44,Curtains,Home Textiles,30,65.87
+10,Headphones,Electronics,50,111.76
+34,Mug,Drinkware,7,13.99

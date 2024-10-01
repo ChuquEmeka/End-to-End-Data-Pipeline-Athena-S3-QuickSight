@@ -14,6 +14,38 @@ The **EmekaMarkt E2E Data Project** is an end-to-end data pipeline project that 
 
 ## Project Structure
 
-EmekaMarkt-E2E-DataProject/ ├── unit_test_folder/ │ ├── customer_dim.csv │ ├── fact_sales.csv │ ├── location_dim.csv │ ├── product_dim.csv │ ├── promotion_dim.csv │ ├── raw_sales_data.csv │ ├── review_dim.csv │ └── shipping_dim.csv ├── unused codes/ │ ├── all_sales_data.py │ ├── create_sample_sales_dataset.py │ ├── raw.py │ ├── silver_transformation.py │ └── transformation_code.py ├── output/ │ ├── customer_dim.csv │ ├── fact_sales.csv │ ├── location_dim.csv │ ├── product_dim.csv │ ├── promotion_dim.csv │ ├── review_dim.csv │ └── shipping_dim.csv ├── requirements.txt ├── sales_raw_data_creation.py ├── sample_raw_sales_data.csv ├── silver_transformed_all.py ├── transformation_unit_test.py └── .github/ └── workflows/ └── ci_cd_pipeline.yml
+EmekaMarkt-E2E-DataProject/
+├── unit_test_folder/
+│   ├── customer_dim.csv
+│   ├── fact_sales.csv
+│   ├── location_dim.csv
+│   ├── product_dim.csv
+│   ├── promotion_dim.csv
+│   ├── raw_sales_data.csv
+│   ├── review_dim.csv
+│   └── shipping_dim.csv
+├── unused codes/
+│   ├── all_sales_data.py
+│   ├── create_sample_sales_dataset.py
+│   ├── raw.py
+│   ├── silver_transformation.py
+│   └── transformation_code.py
+├── output/
+│   ├── customer_dim.csv
+│   ├── fact_sales.csv
+│   ├── location_dim.csv
+│   ├── product_dim.csv
+│   ├── promotion_dim.csv
+│   ├── review_dim.csv
+│   └── shipping_dim.csv
+├── requirements.txt
+├── sales_raw_data_creation.py
+├── sample_raw_sales_data.csv
+├── silver_transformed_all.py
+├── transformation_unit_test.py
+└── .github/
+    └── workflows/
+        └── ci_cd_pipeline.yml
+
 
 

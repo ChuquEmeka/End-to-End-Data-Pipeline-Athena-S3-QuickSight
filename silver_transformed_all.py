@@ -69,22 +69,27 @@ def transform_sales_data(df_raw, output_dir='output'):
 
 
 
+    import boto3
+    from io import StringIO
+
+    # Initialize the S3 client
     s3 = boto3.client('s3')
     bucket_name = 'emeka-transformed-sales-data'
+
     # Function to upload a DataFrame to S3 as CSV
-    def upload_to_s3(df, file_name, bucket):
+    def upload_to_s3(df, folder_name, file_name, bucket):
         csv_buffer = StringIO()
         df.to_csv(csv_buffer, index=False)
-        s3.put_object(Bucket=bucket, Key=file_name, Body=csv_buffer.getvalue())
+        s3.put_object(Bucket=bucket, Key=f'{folder_name}/{file_name}', Body=csv_buffer.getvalue())
 
-    # Save unique dimension tables and fact table to S3
-    upload_to_s3(df_product, 'product_dim.csv', bucket_name)
-    upload_to_s3(df_customer, 'customer_dim.csv', bucket_name)
-    upload_to_s3(df_location, 'location_dim.csv', bucket_name)
-    upload_to_s3(df_promotion, 'promotion_dim.csv', bucket_name)
-    upload_to_s3(df_shipping, 'shipping_dim.csv', bucket_name)
-    upload_to_s3(df_review, 'review_dim.csv', bucket_name)
-    upload_to_s3(df_fact_sales, 'fact_sales.csv', bucket_name)
+    # Save unique dimension tables and fact table to their respective folders in S3
+    upload_to_s3(df_product, 'product_dim', 'product_dim.csv', bucket_name)
+    upload_to_s3(df_customer, 'customer_dim', 'customer_dim.csv', bucket_name)
+    upload_to_s3(df_location, 'location_dim', 'location_dim.csv', bucket_name)
+    upload_to_s3(df_promotion, 'promotion_dim', 'promotion_dim.csv', bucket_name)
+    upload_to_s3(df_shipping, 'shipping_dim', 'shipping_dim.csv', bucket_name)
+    upload_to_s3(df_review, 'review_dim', 'review_dim.csv', bucket_name)
+    upload_to_s3(df_fact_sales, 'fact_sales', 'fact_sales.csv', bucket_name)
 
 
 

@@ -110,14 +110,13 @@ unit_cost_data = {
     'Smartwatch': 250, 'Charger': 20, 'Speaker': 150, 'Router': 100, 'Modem': 90, 'Projector': 400
 }
 
-# Generate unique IDs for products and customers
+# Generating unique IDs for products and customers
 product_ids = list(range(1, len(expanded_product_data) + 1))
 customer_ids = list(range(1, len(customer_names) + 1))
 
-# Generate sales data
 n_records = 150000
 # n_records = 15
-# Create a DataFrame for sales transactions (fact table)
+# Creating a DataFrame for sales transactions (fact table)
 sales_data = {
     'SaleID': np.arange(1, n_records + 1),
     'ProductID': [random.choice(product_ids) for _ in range(n_records)],  # Foreign Key
@@ -125,19 +124,19 @@ sales_data = {
     'Quantity': np.random.randint(1, 10, size=n_records),
 }
 
-# Generate sequential transaction dates
+# Generating sequential transaction dates
 start_date = pd.Timestamp('2014-01-01')  # Start date
 end_date = pd.to_datetime('now').normalize()  # Ensure it does not exceed now
 # end_date = pd.to_datetime('now', utc=True).normalize()
 date_range = pd.date_range(start=start_date, end=end_date, freq='H')
 
-# Assign random dates (including time) for each transaction
+# Assigning random dates (including time) for each transaction
 sales_data['Date'] = [random.choice(date_range) for _ in range(n_records)]
 
-# Create DataFrame for sales transactions
+# Creating DataFrame for sales transactions
 df_sales = pd.DataFrame(sales_data)
 
-# Ensure LocationID is present
+# Ensuring LocationID is present
 df_location = pd.DataFrame({
     'LocationID': np.arange(1, len(country_city_mapping) + 1),
     'Country': list(country_city_mapping.keys()),
@@ -151,10 +150,10 @@ df_location = pd.DataFrame({
                for country in country_city_mapping.keys()]
 })
 
-# Add a random LocationID to each sale
+# Adding a random LocationID to each sale
 df_sales['LocationID'] = [random.choice(df_location['LocationID']) for _ in range(n_records)]
 
-# Create DataFrame for products
+# Creating DataFrame for products
 df_product = pd.DataFrame({
     'ProductID': product_ids,
     'ProductName': list(expanded_product_data.keys()),
@@ -163,7 +162,7 @@ df_product = pd.DataFrame({
     'UnitPrice': [round(cost * random.uniform(1.5, 3), 2) for cost in unit_cost_data.values()],
 })
 
-# Create DataFrame for customers
+# Creating DataFrame for customers
 df_customer = pd.DataFrame({
     'CustomerID': customer_ids,
     'CustomerName': customer_names,
@@ -172,7 +171,7 @@ df_customer = pd.DataFrame({
     'LoyaltyStatus': [random.choice(['Bronze', 'Silver', 'Gold']) for _ in range(len(customer_names))]
 })
 
-# Create DataFrame for promotions
+# Creating DataFrame for promotions
 promotion_ids = range(1, 11)  # Assuming 10 promotions
 df_promotion = pd.DataFrame({
     'PromotionID': promotion_ids,
@@ -180,7 +179,7 @@ df_promotion = pd.DataFrame({
     'DiscountRate': [random.uniform(0.05, 0.5) for _ in promotion_ids]  # 5% to 50% discount
 })
 
-# Create DataFrame for shipping methods
+# Creating DataFrame for shipping methods
 shipping_ids = range(1, 6)  # Assuming 5 shipping methods
 df_shipping = pd.DataFrame({
     'ShippingID': shipping_ids,
@@ -188,14 +187,14 @@ df_shipping = pd.DataFrame({
     'Cost': [random.uniform(5.0, 50.0) for _ in shipping_ids]  # Random shipping costs
 })
 
-# Create DataFrame for payment methods
+# Creating DataFrame for payment methods
 payment_ids = range(1, 5)  # Assuming 4 payment methods
 df_payment = pd.DataFrame({
     'PaymentID': payment_ids,
     'Method': ['Credit Card', 'PayPal', 'Bank Transfer', 'Cash on Delivery'],
 })
 
-# Create DataFrame for product reviews
+# Creating DataFrame for product reviews
 df_product_reviews = pd.DataFrame({
     'ReviewID': range(1, 101),  # 100 reviews
     'ProductID': [random.choice(product_ids) for _ in range(100)],
@@ -204,13 +203,13 @@ df_product_reviews = pd.DataFrame({
     'Comment': [f'This is a review for product {random.choice(product_ids)}' for _ in range(100)],
 })
 
-# Create DataFrame for marketing channels
+# Creating DataFrame for marketing channels
 df_marketing = pd.DataFrame({
     'ChannelID': range(1, 6),  # Assuming 5 marketing channels
     'ChannelName': ['Email', 'Social Media', 'Search Engine', 'Affiliate', 'Direct'],
 })
 
-# Create JSON objects for each sale and add dimension data as JSON strings
+# Creating JSON objects for each sale and add dimension data as JSON strings
 json_objects = []
 for index, row in df_sales.iterrows():
     sale_record = {
@@ -226,7 +225,7 @@ for index, row in df_sales.iterrows():
         "ReviewID": int(random.choice(df_product_reviews['ReviewID'])),
     }
     
-    # Add dimension data as JSON strings
+    # Adding dimension data as JSON strings
     sale_record['Product'] = df_product[df_product['ProductID'] == sale_record['ProductID']].to_json(orient='records')
     sale_record['Customer'] = df_customer[df_customer['CustomerID'] == sale_record['CustomerID']].to_json(orient='records')
     sale_record['Location'] = df_location[df_location['LocationID'] == sale_record['LocationID']].to_json(orient='records')
@@ -237,17 +236,17 @@ for index, row in df_sales.iterrows():
 
     json_objects.append(sale_record)
 
-# Convert to DataFrame for CSV
+# Converting to DataFrame for CSV
 df_final = pd.DataFrame(json_objects)
 
 # Save to CSV
 # df_final.to_csv('sample_raw_sales_data.csv', index=False)
 #########################################################################
-# Save to CSV
+
 output_file = 'raw_sales_data.csv'
 df_final.to_csv(output_file, index=False)
 
-# Upload to S3
+# Uploading to S3
 s3 = boto3.client('s3')
 bucket_name = 'emeka-market-raw-sales-data'
 s3_file_path = 'raw_sales_data.csv'  # This is the key (name) you want for the file in S3
@@ -257,6 +256,6 @@ s3.upload_file(output_file, bucket_name, s3_file_path)
 
 print(f"Sales data saved to {output_file} and uploaded to S3 bucket {bucket_name}.")
 #########################################################################
-# Display sample outputs
+# Displaying sample outputs
 print("Sales Data Sample with Dimensions:")
 print(df_final.head())

@@ -155,13 +155,28 @@ The following KPIs were defined and visualized in the dashboards:
 
 ---
 
-## **10. Conclusion**
+## **Conclusion**
 
 The **EmekaMarkt E2E Data Pipeline** demonstrates my ability to manage an entire data pipeline, from generating raw data to delivering business insights through interactive dashboards. Key highlights of the project include:
 
-- **Data Engineering**: Efficient transformation of raw data into structured formats.
-- **Data Analysis**: Defining and visualizing KPIs that help monitor business performance.
-- **Cloud Technologies**: Leveraging AWS services like S3, Athena, and QuickSight to create a scalable, cloud-native solution.
+- **Data Engineering**:
+  - Efficient transformation of raw data into structured formats.
+  - Design and implementation of a star schema for optimized querying and reporting.
+  - Development of automated ETL processes to streamline data ingestion and processing.
+  - Integration of data validation checks through unit testing to ensure data integrity.
+  - Utilization of cloud-based services for scalable and cost-effective data management.
+
+- **Data Analysis**:
+  - Definition and tracking of key performance indicators (KPIs) to assess business performance.
+  - Utilization of visual analytics tools (AWS QuickSight) to create interactive dashboards for data insights.
+  - Application of data-driven decision-making processes to identify growth opportunities and areas for improvement.
+  - Exploration and interpretation of complex datasets to provide actionable insights for stakeholders.
+  - Development of drill-through and other functionalities in dashboards to enable in-depth analysis of metrics.
+
+- **Cloud Technologies**:
+  - Leveraging AWS services (S3, Athena, QuickSight) for scalable data storage and querying.
+  - Implementation of CI/CD practices using GitHub Actions to automate testing and deployment processes.
+  - Management of data pipelines in a cloud environment to ensure efficient data flow and processing.
 
 
 

@@ -38,14 +38,14 @@ jobs:
 
       - name: Run unit tests
         run: |
-          python transformation_unit_test.py  
+          python -m unit_test.scr.transformation_unit_test  
 
       - name: Apply transformation on Production Data and save Dimension and Fact Tables to S3
         if: success()  
         run: |
-          python silver_transformed_all.py 
+          python jobs/tasks/raw_data_transformation/silver_transformed_all.py 
 
       - name: Also Run silver_transformation
         if: success()  
         run: |
-          python "unused codes/silver_transformation.py"
+          python jobs/tasks/raw_data_transformation/silver_transformation.py

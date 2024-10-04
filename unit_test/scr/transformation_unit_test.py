@@ -1,11 +1,22 @@
 
+import sys
+import os
+
+# Add the root project directory to Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
+
+from jobs.tasks.raw_data_transformation.silver_transformed_all import transform_sales_data
+
+# from jobs.tasks.raw_data_transformation.silver_transformation.silver_transformation import transform_sales_data
+
+# from jobs.tasks.raw_data_transformation.silver_transformation.silver_transformed_all import transform_sales_data
 
 
 import pandas as pd
 import json
 import os
 import unittest
-from silver_transformed_all import transform_sales_data
+# from silver_transformed_all import transform_sales_data
 from unittest.mock import patch
 from io import StringIO  # Import StringIO
 

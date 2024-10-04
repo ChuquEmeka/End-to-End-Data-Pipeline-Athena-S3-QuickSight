@@ -86,7 +86,7 @@ Once the raw data was created, it was transformed into a structured, queryable f
 To ensure the accuracy of the data transformation, the transformation script was tested using Python’s built-in **unittest** framework. The testing process verified that the transformations met the expected business rules.
 
 The CI/CD pipeline, managed through **GitHub Actions**, was set up to:
-1. **Automatically trigger** a run whenever there is a `push` or `pull` Git command.
+1. **For the purpose of this project, Automatically trigger** a run whenever there is a `push` or `pull` Git command.
 2. Run unit tests automatically to ensure the tests pass before executing the transformation script.
 3. Deploy the transformation script only if all tests pass.
 
@@ -103,7 +103,7 @@ This automation ensures that no incorrect data enters production.
 The data follows a **star schema** design, which organizes the transformed data into a central **fact table** and several related **dimension tables**.
 
 ### **Fact Table**:
-- **`fact_sales`**: Contains key metrics like `Quantity`, `Revenue`, `Profit`, and foreign keys linking to dimension tables.
+- **`fact_sales`**: Contains key metric like `Quantity` and foreign keys linking to dimension tables.
 
 ### **Dimension Tables**:
 - **Product Dimension (`product_dim`)**: Contains product details such as product name, category, and price.
@@ -119,7 +119,7 @@ The data follows a **star schema** design, which organizes the transformed data 
 
 ## **7. Data Visualization and Insights**
 
-**AWS QuickSight** was used to create two interactive dashboards: 
+**AWS QuickSight** was used to create two interactive dashboards.   I can also produce similar dynamic dashboards using **Tableau**, **Power BI**, and **Looker**.: 
 1. **Sales Overview Dashboard** (Source): Provides a high-level overview of total sales, profit margins, and other key metrics.
 2. **Product Insights Dashboard** (Target): Offers a detailed breakdown of product performance, allowing drill-through navigation from the Sales Overview Dashboard.
 

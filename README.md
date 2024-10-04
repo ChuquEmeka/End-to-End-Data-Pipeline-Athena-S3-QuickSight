@@ -1,97 +1,168 @@
-# EmekaMarkt E2E Data Project
+# **EmekaMarkt End-to-End Data Pipeline: From Raw Data to Business Insights**
 
-## Project Overview
+## **Table of Contents**
+1. Introduction
+2. Project Overview
+3. Tools and Technologies Used
+4. Data Creation
+5. Data Transformation
+    - Unit Testing and GitHub Actions Integration
+6. Data Model: Star Schema and Entity Relationship Diagram (ERD)
+7. Data Visualization and Insights
+8. Project Scalability: Using Databricks
+9. Key Performance Indicators (KPIs)
+10. Conclusion
 
-The **EmekaMarkt E2E Data Project** is an end-to-end data pipeline project that demonstrates cloud-based data engineering, ETL processes, and business intelligence reporting using AWS. The project focuses on transforming e-commerce sales data and generating insightful reports in AWS QuickSight, while adhering to AWS Free Tier limits.  
+---
 
+## **1. Introduction**
 
-  
-### Explanation of Star Schema and Entity-Relationship Diagram
+This documentation outlines the design and implementation of an **end-to-end (E2E) data pipeline** for **EmekaMarkt**, a Germany-based e-commerce business. The project demonstrates capabilities in data engineering, data analysis, and cloud-based infrastructure management, following a step-by-step process from data generation to visualization.
 
-In my EmekaMarkt E2E Data Project, I adopted the **star schema** to effectively model my data for a few key reasons.
+---
 
-The star schema is a type of database schema that organizes data into fact and dimension tables. The **fact table**, which represents the core transactional data, is positioned at the center, while the surrounding **dimension tables** contain descriptive attributes related to the facts. For example, my fact table, **Fact Sales**, includes metrics like quantity sold and payment details, while dimension tables like **Customer Dim**, **Product Dim**, and **Location Dim** provide additional context, such as customer information, product specifications, and location details.
+## **2. Project Overview**
 
-The primary advantages of using a star schema are:
+The **EmekaMarkt E2E Data Pipeline** showcases an integrated data engineering project that covers:
+- **Data creation**: Simulated raw sales data generation using Python.
+- **Data transformation**: Cleaning and structuring raw data using Python and querying with AWS Athena.
+- **Automated testing**: Using `unittest` in Python to validate transformation logic.
+- **Cloud storage and querying**: Using AWS S3 and Athena for scalable storage and querying.
+- **Business insights**: Created interactive dashboards using AWS QuickSight.
 
-1. **Simplicity and Clarity**: The star schema is easy to understand and navigate. The straightforward relationship between the fact table and the dimension tables makes it intuitive for users and analysts to query data and generate reports.
+This pipeline demonstrates a real-world scenario where business performance is analyzed using cloud-native tools.
 
-2. **Performance Optimization**: This schema design allows for faster query performance. Since dimension tables are denormalized, they reduce the number of joins needed when querying the data, which significantly speeds up retrieval times.
+---
 
-3. **Enhanced Reporting**: With a star schema, it becomes simpler to create complex reports and visualizations. For my project, this structure facilitates efficient data analysis, especially when I connect the transformed data to AWS QuickSight for business insights.
+## **3. Tools and Technologies Used**
 
-I also created an **Entity-Relationship Diagram (ERD)** to visually represent the relationships between the different entities in my data model. The ERD provides a clear overview of how the fact table interacts with the various dimension tables through foreign key relationships. This visual aid not only helps in understanding the data model but also serves as documentation for future reference.
+The following tools and technologies were used throughout this project:
 
-By adopting the star schema and ERD, I can ensure that my data model is both efficient and effective for analysis, allowing me to derive valuable insights from the e-commerce sales data while preparing it for potential future needs.  
-![ER](images/ER.png)
-
-
-### Key Components
-
-1. **Data Generation**: Simulated e-commerce sales data is generated, encompassing sales transactions enriched with product information, customer details, promotions, shipping methods, and reviews.
-2. **ETL Pipeline**: A robust ETL pipeline is established to extract, transform, and load data.
-3. **Data Storage**: Raw and transformed data is stored in Amazon S3 buckets.
-4. **Unit Testing**: Automated unit tests validate the transformation logic before deploying to production.
-5. **CI/CD Pipeline**: Continuous integration and deployment are implemented using GitHub Actions, ensuring code quality and automated deployments.
-
-## Project Structure
-EmekaMarkt-E2E-DataProject/  
-├── unit_test_folder/  
-│   ├── customer_dim.csv  
-│   ├── fact_sales.csv  
-│   ├── location_dim.csv  
-│   ├── product_dim.csv  
-│   ├── promotion_dim.csv  
-│   ├── raw_sales_data.csv  
-│   ├── review_dim.csv  
-│   └── shipping_dim.csv  
-├── unused codes/  
-│   ├── all_sales_data.py  
-│   ├── create_sample_sales_dataset.py  
-│   ├── raw.py  
-│   ├── silver_transformation.py  
-│   └── transformation_code.py  
-├── output/  
-│   ├── customer_dim.csv  
-│   ├── fact_sales.csv  
-│   ├── location_dim.csv  
-│   ├── product_dim.csv  
-│   ├── promotion_dim.csv  
-│   ├── review_dim.csv  
-│   └── shipping_dim.csv  
-├── requirements.txt  
-├── sales_raw_data_creation.py  
-├── sample_raw_sales_data.csv  
-├── silver_transformed_all.py  
-├── transformation_unit_test.py  
-└── .github/  
-    └── workflows/  
-        └── ci_cd_pipeline.yml  
-
-  
-  
-![ER](images/workflows.png)
+- **AWS S3**: Storing both raw and transformed data.
+- **AWS Athena**: Querying data stored in S3 using SQL.
+- **AWS QuickSight**: Building interactive dashboards for business insights.
+- **Python**: For data transformation and processing.
+- **Unittest (Python)**: For automated testing to ensure the accuracy of data transformations.
+- **GitHub Actions**: Used for setting up CI/CD to run automated tests and deploy the transformations.
 
 
-## Workflow
 
-1. **Data Generation**: 
-   - E-commerce data is simulated and saved as `raw_sales_data.csv`.
-   - Data includes dimensions such as customers, products, promotions, and shipping.
+---
 
-2. **ETL Pipeline**:
-   - **Transformation Logic**: Implemented in `silver_transformed_all.py`, this script processes raw data and generates cleaned dimension and fact tables.
-   - **Unit Testing**: `transformation_unit_test.py` ensures the transformation logic is correct.
+## **4. Data Creation**
 
-3. **Data Storage**:
-   - Raw data is stored in the S3 bucket `emeka-market-raw-sales-data`.
-   - Transformed data is also uploaded to the S3 bucket after successful transformations.  
+The data creation process involved generating synthetic e-commerce sales data for **EmekaMarkt** using a Python script i wrote. The script produced various dimensions of data such as:
 
-4. **CI/CD Pipeline**: Managed through GitHub Actions:
-   - On each push or pull request to the `master` branch, the following steps are executed:
-     - Code is checked out from the repository.
-     - Python environment is set up with dependencies installed from `requirements.txt`.
-     - Unit tests are executed. If they pass, the transformation script is run, and the output is saved to S3.
-     - Glue job execution is planned for future implementation.
+- **Customer**: Information about customer details.
+- **Product**: Product attributes such as category and price.
+- **Location**: Geographical information related to sales.
+- **Promotion**: Discounts and promotions applied to the products.
+- **Shipping**: Shipping methods and costs.
+- **Review**: Customer reviews and ratings.
+- **Sales (fact table)**: Transaction-level data.
+
+The generated raw data was stored in the S3 bucket `emeka-market-raw-sales-data` for further transformation.
+
+**Script Reference**: [sales_raw_sales_data_creation.py](./jobs/tasks/sales_raw_data_creation/sales_raw_data_creation.py)
+
+---
+
+## **5. Data Transformation**
+
+Once the raw data was created, it was transformed into a structured, queryable format using **Python (pandas)** for transformation and **SQL queries in Athena** for data access. The transformation converted the raw data into the following tables:
+
+- **Fact Table**: `fact_sales` containing transaction data.
+- **Dimension Tables**: `product_dim`, `customer_dim`, `location_dim`, `promotion_dim`, `shipping_dim`, and `review_dim`.
+
+### **Transformation Process Overview**:
+1. Clean and transform the raw sales data using Python.
+2. Organize the data into a **star schema** format for efficient querying.
+3. Store the final, transformed tables in the S3 bucket `emeka-transformed-sales-data`.
+
+**Transformation Script**: [silver_transformation.py](./jobs/tasks/raw_data_transformation/silver_transformed_all.py)
+
+### **Unit Testing and GitHub Actions Integration**
+
+To ensure the accuracy of the data transformation, the transformation script was tested using Python’s built-in **unittest** framework. The testing process verified that the transformations met the expected business rules.
+
+The CI/CD pipeline, managed through **GitHub Actions**, was set up to:
+1. **Automatically trigger** a run whenever there is a `push` or `pull` Git command.
+2. Run unit tests automatically to ensure the tests pass before executing the transformation script.
+3. Deploy the transformation script only if all tests pass.
+
+This automation ensures that no incorrect data enters production.
+
+**Unit Test Script**: [transformation_unit_test.py](./unit_test/scr/transformation_unit_test.py)
+
+**GitHub Actions Workflow**: ![workflows](images/workflows.png).
+
+---
+
+## **6. Data Model: Star Schema and ERD**
+
+The data follows a **star schema** design, which organizes the transformed data into a central **fact table** and several related **dimension tables**.
+
+### **Fact Table**:
+- **`fact_sales`**: Contains key metrics like `Quantity`, `Revenue`, `Profit`, and foreign keys linking to dimension tables.
+
+### **Dimension Tables**:
+- **Product Dimension (`product_dim`)**: Contains product details such as product name, category, and price.
+- **Customer Dimension (`customer_dim`)**: Stores customer details, including loyalty status and contact information.
+- **Location Dimension (`location_dim`)**: Captures geographic data related to transactions.
+- **Promotion Dimension (`promotion_dim`)**: Information on discounts applied to sales.
+- **Shipping Dimension (`shipping_dim`)**: Shipping methods and associated costs.
+- **Review Dimension (`review_dim`)**: Customer feedback on products.
+
+**Entity Relationship Diagram (ERD)**: ![ER](images/ER.png)
+
+---
+
+## **7. Data Visualization and Insights**
+
+**AWS QuickSight** was used to create two interactive dashboards: 
+1. **Sales Overview Dashboard** (Source): Provides a high-level overview of total sales, profit margins, and other key metrics.
+2. **Product Insights Dashboard** (Target): Offers a detailed breakdown of product performance, allowing drill-through navigation from the Sales Overview Dashboard.
+
+### **Sales Overview Dashboard**:
+The **Sales Overview Dashboard** provided an overall view of the store’s performance. It summarized total revenue, profit margins, and the performance of different product categories over time. The dashboard also showed how shipping methods affected order volumes, providing insights into customer preferences regarding shipping options.
+
+**PDF Export**: [Sales Overview Dashboard](./visualizations/Sales_Overview_Dashboard.pdf)
+
+### **Product Insights Dashboard**:
+The **Product Insights Dashboard** focused on product-level performance, providing detailed metrics such as total cost, revenue generated, and profit margins for specific products. This dashboard allowed users to drill down into specific products to analyze their sales by region and customer reviews, offering a comprehensive view of individual product success.
+
+**PDF Export**: [Product Insights Dashboard](./visualizations/Product_Insights_Dashboard.pdf)
+
+These dashboards provided clear insights into the business’s overall performance and individual product success, helping to guide decision-making.
+
+---
+
+## **8. Project Scalability: Using Databricks**
+
+Although **AWS S3** and **Athena** were used for this project, I have experience using **Databricks** in professional settings, which could scale this pipeline for larger datasets. Databricks offers advanced processing capabilities, and combined with **AWS Glue**, it can automate ETL workflows seamlessly.
+
+---
+
+## **9. Key Performance Indicators (KPIs)**
+
+The following KPIs were defined and visualized in the dashboards:
+
+1. **Total Revenue**: Total sales generated from the store.
+2. **Profit Margin**: Difference between revenue and total costs (including shipping).
+3. **Customer Loyalty**: Measured by customer loyalty status (e.g., Bronze, Silver, Gold).
+4. **Product Performance**: Revenue and profit per product category and individual product.
+5. **Shipping Efficiency**: Number of orders by shipping methods and the costs associated with them.
+
+---
+
+## **10. Conclusion**
+
+The **EmekaMarkt E2E Data Pipeline** demonstrates my ability to manage an entire data pipeline, from generating raw data to delivering business insights through interactive dashboards. Key highlights of the project include:
+
+- **Data Engineering**: Efficient transformation of raw data into structured formats.
+- **Data Analysis**: Defining and visualizing KPIs that help monitor business performance.
+- **Cloud Technologies**: Leveraging AWS services like S3, Athena, and QuickSight to create a scalable, cloud-native solution.
 
 
+
+---

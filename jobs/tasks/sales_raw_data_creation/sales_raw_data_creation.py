@@ -114,7 +114,7 @@ unit_cost_data = {
 product_ids = list(range(1, len(expanded_product_data) + 1))
 customer_ids = list(range(1, len(customer_names) + 1))
 
-n_records = 150000
+n_records = 15000
 # n_records = 15
 # Creating a DataFrame for sales transactions (fact table)
 sales_data = {
@@ -125,7 +125,7 @@ sales_data = {
 }
 
 # Generating sequential transaction dates
-start_date = pd.Timestamp('2014-01-01')  # Start date
+start_date = pd.Timestamp('2018-01-01')  # Start date
 end_date = pd.to_datetime('now').normalize()  # Ensure it does not exceed now
 # end_date = pd.to_datetime('now', utc=True).normalize()
 date_range = pd.date_range(start=start_date, end=end_date, freq='H')
@@ -240,7 +240,7 @@ for index, row in df_sales.iterrows():
 df_final = pd.DataFrame(json_objects)
 
 # Save to CSV
-# df_final.to_csv('sample_raw_sales_data.csv', index=False)
+df_final.to_csv('sample_raw_sales_data.csv', index=False)
 #########################################################################
 
 # output_file = 'raw_sales_data.csv'

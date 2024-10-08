@@ -7,7 +7,7 @@ import boto3
 from io import StringIO
 
 # Function to read raw sales data directly from S3
-def read_sales_data_from_s3(bucket_name='emeka-market-raw-sales-data', s3_file_path='raw_sales_data.csv'):
+def read_sales_data_from_s3(bucket_name='emeka-market-raw-sales-data', s3_file_path='sample_raw_sales_data.csv'):
     s3 = boto3.client('s3')
     # Read the CSV file from S3 into a DataFrame
     obj = s3.get_object(Bucket=bucket_name, Key=s3_file_path)

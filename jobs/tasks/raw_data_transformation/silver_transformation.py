@@ -67,7 +67,7 @@ def silver_transformation(input_bucket, input_file, output_bucket, output_file):
 # Main execution
 if __name__ == "__main__":
     input_bucket = 'emeka-market-raw-sales-data'
-    input_file = 'raw_sales_data.csv'
+    input_file = 'sample_raw_sales_data.csv'
     output_bucket = 'emeka-transformed-sales-data'
     output_file = 'combined_transformed_data.csv'
 

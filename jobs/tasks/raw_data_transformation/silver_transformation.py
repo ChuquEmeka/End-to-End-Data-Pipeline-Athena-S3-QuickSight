@@ -3,6 +3,7 @@ import json
 import boto3
 from io import StringIO
 
+
 def read_sales_data_from_s3(bucket_name, s3_file_path):
     s3 = boto3.client('s3')
     obj = s3.get_object(Bucket=bucket_name, Key=s3_file_path)

@@ -21,7 +21,7 @@ def silver_transformation(input_bucket, input_file, output_bucket, output_file):
     # Load raw sales data from S3
     df_raw = read_sales_data_from_s3(input_bucket, input_file)
 
-    # Explode the JSON columns for each sale
+    # Exploding the JSON columns for each sale
     df_sales_expanded = pd.DataFrame()
 
     # Exploding Product data
